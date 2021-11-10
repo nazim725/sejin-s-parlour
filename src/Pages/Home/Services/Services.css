@@ -1,0 +1,7 @@
+.service-container{
+    display: grid;
+    grid-template-columns: repeat(3,1fr);
+    margin: 0 40px;
+    grid-gap: 30px;
+
+}
