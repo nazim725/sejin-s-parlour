@@ -40,7 +40,7 @@ const MyAppointment = () => {
     const [orders, setOrders] = React.useState([])
 
     React.useEffect(() => {
-        const url = `http://localhost:5000/orders?email=${user.email}`
+        const url = `https://serene-badlands-96491.herokuapp.com/orders?email=${user.email}`
         console.log(url)
         fetch(url)
             .then(res => res.json())
@@ -56,7 +56,7 @@ const MyAppointment = () => {
     const handleDeleteOrder = id => {
         const proceed = window.confirm('Are you sure, you want to delete?');
         if (proceed) {
-            const url = `http://localhost:5000/orders/${id}`;
+            const url = `https://serene-badlands-96491.herokuapp.com/orders/${id}`;
             fetch(url, {
                 method: 'DELETE'
             })
@@ -100,7 +100,7 @@ const MyAppointment = () => {
                                 <StyledTableCell align="center">{row.status}</StyledTableCell>
                                 <StyledTableCell align="center"><Button onClick={() => handleDeleteOrder(row._id)}>Cancel Order</Button></StyledTableCell>
                                 <StyledTableCell align="center">{row.payment ? 'Paid' :
-                                    <NavLink style={{ textDecoration: 'none' }} to={`dashboard/payment/${row._id}`}><button className="button-update">Pay</button></NavLink>}</StyledTableCell>
+                                    <NavLink style={{ textDecoration: 'none' }} to={`/dashboard/payment/${row._id}`}><button className="button-update">Pay</button></NavLink>}</StyledTableCell>
 
                             </StyledTableRow>
                         ))}

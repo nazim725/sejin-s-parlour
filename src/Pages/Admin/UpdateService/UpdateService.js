@@ -12,7 +12,7 @@ const UpdateService = () => {
     const [service, setService] = useState({});
     const navigate = useNavigate();
 
-    const url = `http://localhost:5000/services/${serviceId}`
+    const url = `https://serene-badlands-96491.herokuapp.com/services/${serviceId}`
     useEffect(() => {
         fetch(url)
             .then(res => res.json())
@@ -23,7 +23,7 @@ const UpdateService = () => {
 
 
     const handleUpdateService = e => {
-        const url = `http://localhost:5000/services/${serviceId}`;
+        const url = `https://serene-badlands-96491.herokuapp.com/services/${serviceId}`;
         console.log(url)
         fetch(url, {
             method: 'PUT',
@@ -38,7 +38,7 @@ const UpdateService = () => {
                     alert('Update Successful');
                     setService({});
                     navigate('/adminHome/manageService')
-                    
+
 
                 }
             })
@@ -78,7 +78,7 @@ const UpdateService = () => {
                 <form onSubmit={handleUpdateService}>
                     <TextField
                         sx={{ width: '90%', m: 1, input: { color: 'blue' } }}
-                        
+
                         id="outlined-password-input"
                         name="name"
                         onChange={handleNameChange}
@@ -87,7 +87,7 @@ const UpdateService = () => {
 
                     />
                     <TextField
-                        sx={{ width: '90%', m: 1, input: { color: 'blue' }}}
+                        sx={{ width: '90%', m: 1, input: { color: 'blue' } }}
                         id="outlined-size-small"
                         name="price"
                         onChange={handlePriceChange}
@@ -95,7 +95,7 @@ const UpdateService = () => {
                         size="small"
                     />
                     <TextField
-                        sx={{ width: '90%', m: 1,input: { color: 'blue' } }}
+                        sx={{ width: '90%', m: 1, input: { color: 'blue' } }}
                         id="outlined-size-small"
                         name="img"
                         onChange={handleImgChange}
@@ -103,7 +103,7 @@ const UpdateService = () => {
                         size="small"
                     />
                     <TextField
-                        sx={{ width: '90%', m: 1,input: { color: 'blue' } }}
+                        sx={{ width: '90%', m: 1, input: { color: 'blue' } }}
                         id="outlined-size-small"
                         name="description"
                         onChange={handleDescriptionChange}

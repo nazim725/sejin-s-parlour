@@ -10,16 +10,22 @@ const Payment = () => {
     const { bookingId } = useParams();
     const [order, setOrder] = useState({});
     useEffect(() => {
-        fetch(`http://localhost:5000/orders/${bookingId}`)
+        fetch(`https://serene-badlands-96491.herokuapp.com/orders/${bookingId}`)
             .then(res => res.json())
-            .then(data => setOrder(data));
-    }, [appointmentId]);
+            .then(data => {
+                setOrder(data)
+                console.log(data)
+            });
+    }, [bookingId]);
     return (
         <div>
-            <h2>Please Pay for: {order.customerName} for {order.serviceName}</h2>
-            <h4>Pay: ${order.price}</h4>
 
-            {order?.price && <Elements stripe={stripePromise}>
+            <h2 style={{ color: '#00ffff', marginTop: '20px', marginbottom: '20px' }}>Please Pay </h2>
+            <h2 style={{ color: '#00ffff', marginTop: '20px', marginbottom: '20px' }}> Customer Name :{order.customerName}</h2>
+            <h2 style={{ color: '#00ffff', marginTop: '20px', marginbottom: '20px' }}> Service Name  : {order.serviceName}</h2>
+            <h2 style={{ color: '#00ffff', marginTop: '20px', marginbottom: '20px' }}>Pay: ${order.servicePrice}</h2>
+
+            {order?.servicePrice && <Elements stripe={stripePromise}>
                 <CheckoutForm
                     order={order} />
             </Elements>}

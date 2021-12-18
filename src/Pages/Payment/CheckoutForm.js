@@ -1,10 +1,10 @@
 import { CardElement, useElements, useStripe } from '@stripe/react-stripe-js';
 import React, { useEffect, useState } from 'react';
-import useAuth from '../../../hooks/useAuth'
 import { CircularProgress } from '@mui/material';
+import useAuth from '../../hooks/useAuth';
 
-const CheckoutForm = ({ appointment }) => {
-    const { price, patientName, _id } = appointment;
+const CheckoutForm = ({ order }) => {
+    const { servicePrice, customerName, _id } = order;
     const stripe = useStripe();
     const elements = useElements();
     const [error, setError] = useState('');
@@ -13,19 +13,19 @@ const CheckoutForm = ({ appointment }) => {
     const [processing, setProcessing] = useState(false);
     const { user } = useAuth()
     useEffect(() => {
-        fetch('http://localhost:5000/create-payment-intent', {
+        fetch('https://serene-badlands-96491.herokuapp.com/create-payment-intent', {
             method: 'POST',
             headers: {
                 'content-type': 'application/json'
             },
-            body: JSON.stringify({ price })
+            body: JSON.stringify({ servicePrice })
         })
             .then(res => res.json())
             .then(data => {
                 console.log(data);
                 setClientSecret(data.clientSecret)
             });
-    }, [price]);
+    }, [servicePrice]);
 
     const handleSubmit = async (e) => {
         e.preventDefault();
@@ -65,7 +65,7 @@ const CheckoutForm = ({ appointment }) => {
                 payment_method: {
                     card: card,
                     billing_details: {
-                        name: patientName,
+                        name: customerName,
                         email: user.email
                     },
                 },
@@ -88,7 +88,7 @@ const CheckoutForm = ({ appointment }) => {
                 last4: paymentMethod.card.last4,
                 transaction: paymentIntent.client_secret.slice('_secret')[0]
             }
-            const url = `http://localhost:5000/appointments/${_id}`;
+            const url = `https://serene-badlands-96491.herokuapp.com/orders/${_id}`;
             fetch(url, {
                 method: 'PUT',
                 headers: {
@@ -110,9 +110,9 @@ const CheckoutForm = ({ appointment }) => {
                         style: {
                             base: {
                                 fontSize: '16px',
-                                color: '#424770',
+                                color: 'white',
                                 '::placeholder': {
-                                    color: '#aab7c4',
+                                    color: '#00ffff',
                                 },
                             },
                             invalid: {
@@ -121,8 +121,8 @@ const CheckoutForm = ({ appointment }) => {
                         },
                     }}
                 />
-                {processing ? <CircularProgress></CircularProgress> : <button type="submit" disabled={!stripe || success}>
-                    Pay ${price}
+                {processing ? <CircularProgress></CircularProgress> : <button className="btn btn-success" type="submit" disabled={!stripe || success}>
+                    Pay ${servicePrice}
                 </button>}
             </form>
             {

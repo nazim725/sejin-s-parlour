@@ -37,7 +37,7 @@ const OrderList = () => {
 
 
   React.useEffect(() => {
-    fetch('http://localhost:5000/orders/all')
+    fetch('https://serene-badlands-96491.herokuapp.com/orders/all')
       .then(res => res.json())
       .then(data => {
         setOrders(data)
@@ -48,7 +48,7 @@ const OrderList = () => {
   const handleDeleteOrder = id => {
     const proceed = window.confirm('Are you sure, you want to delete?');
     if (proceed) {
-      const url = `http://localhost:5000/orders/${id}`;
+      const url = `https://serene-badlands-96491.herokuapp.com/orders/${id}`;
 
       fetch(url, {
         method: 'DELETE'
@@ -66,7 +66,7 @@ const OrderList = () => {
 
 
   const handleChangedStatus = id => {
-    const url = `http://localhost:5000/orders/${id}`
+    const url = `https://serene-badlands-96491.herokuapp.com/orders/${id}`
     // console.log(id)
     console.log(url)
     fetch(url, {

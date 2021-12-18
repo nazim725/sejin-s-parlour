@@ -22,7 +22,7 @@ const AddReview = () => {
         const newReview = { name, img, description, companyName, rating, designation }
 
 
-        fetch('http://localhost:5000/reviews', {
+        fetch('https://serene-badlands-96491.herokuapp.com/reviews', {
             method: 'POST',
             headers: {
                 'content-type': 'application/json'

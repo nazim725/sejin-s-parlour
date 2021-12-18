@@ -23,7 +23,7 @@ const Booking = () => {
     }
 
     useEffect(() => {
-        const url = `http://localhost:5000/services/${serviceId}`
+        const url = `https://serene-badlands-96491.herokuapp.com/services/${serviceId}`
         fetch(url)
             .then(res => res.json())
             .then(data => {
@@ -42,7 +42,7 @@ const Booking = () => {
 
         }
         // send to the server
-        fetch('http://localhost:5000/orders', {
+        fetch('https://serene-badlands-96491.herokuapp.com/orders', {
             method: 'POST',
             headers: {
                 'content-type': 'application/json'

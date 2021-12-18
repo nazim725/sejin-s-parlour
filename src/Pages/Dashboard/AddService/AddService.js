@@ -19,7 +19,7 @@ const AddService = () => {
         const newService = { name, price, img, description }
 
 
-        fetch('http://localhost:5000/services', {
+        fetch('https://serene-badlands-96491.herokuapp.com/services', {
             method: 'POST',
             headers: {
                 'content-type': 'application/json'
