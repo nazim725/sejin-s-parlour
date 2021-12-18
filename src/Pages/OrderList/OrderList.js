@@ -7,6 +7,7 @@ import TableContainer from '@mui/material/TableContainer';
 import TableHead from '@mui/material/TableHead';
 import TableRow from '@mui/material/TableRow';
 import Paper from '@mui/material/Paper';
+import './OrderList.css'
 
 const StyledTableCell = styled(TableCell)(({ theme }) => ({
   [`&.${tableCellClasses.head}`]: {
@@ -14,7 +15,7 @@ const StyledTableCell = styled(TableCell)(({ theme }) => ({
     color: theme.palette.common.white,
   },
   [`&.${tableCellClasses.body}`]: {
-    fontSize: 14,
+    fontSize: 12,
   },
 }));
 
@@ -31,18 +32,66 @@ const StyledTableRow = styled(TableRow)(({ theme }) => ({
 
 const OrderList = () => {
 
-    const [orders,setOrders]=React.useState([])
+  const [orders, setOrders] = React.useState([])
+  const [status, setStatus] = React.useState('');
 
-    React.useEffect(() => {
-        fetch('http://localhost:5000/orders')
-            .then(res => res.json())
-            .then(data => {
-                setOrders(data)
-                console.log(data)
-            })
-    }, [])
-    return (
-        <TableContainer component={Paper}>
+
+  React.useEffect(() => {
+    fetch('http://localhost:5000/orders/all')
+      .then(res => res.json())
+      .then(data => {
+        setOrders(data)
+        console.log(data)
+      })
+  }, [])
+
+  const handleDeleteOrder = id => {
+    const proceed = window.confirm('Are you sure, you want to delete?');
+    if (proceed) {
+      const url = `http://localhost:5000/orders/${id}`;
+
+      fetch(url, {
+        method: 'DELETE'
+      })
+        .then(res => res.json())
+        .then(data => {
+          if (data.deletedCount > 0) {
+            alert('deleted successfully');
+            const remainingOrder = orders.filter(order => order._id !== id);
+            setOrders(remainingOrder);
+          }
+        });
+    }
+  }
+
+
+  const handleChangedStatus = id => {
+    const url = `http://localhost:5000/orders/${id}`
+    // console.log(id)
+    console.log(url)
+    fetch(url, {
+      method: 'put',
+      headers: {
+        'content-type': 'application/json'
+      },
+      body: JSON.stringify({ status })
+    })
+      .then(res => res.json())
+      .then(data => {
+        if (data.modifiedCount) {
+          alert("Update successful")
+          window.location.reload(false);
+        }
+
+
+      })
+
+  }
+
+
+
+  return (
+    <TableContainer component={Paper}>
       <Table sx={{ minWidth: 700 }} aria-label="customized table">
         <TableHead>
           <TableRow>
@@ -51,7 +100,9 @@ const OrderList = () => {
             <StyledTableCell align="center">Service Name</StyledTableCell>
             <StyledTableCell align="center">Service Price</StyledTableCell>
             <StyledTableCell align="center">Status</StyledTableCell>
-           
+            <StyledTableCell align="center">Action</StyledTableCell>
+            <StyledTableCell align="center">Remove Order</StyledTableCell>
+
           </TableRow>
         </TableHead>
         <TableBody>
@@ -64,12 +115,25 @@ const OrderList = () => {
               <StyledTableCell align="center">{row.serviceName}</StyledTableCell>
               <StyledTableCell align="center">{row.servicePrice}</StyledTableCell>
               <StyledTableCell align="center">{row.status}</StyledTableCell>
+              <StyledTableCell align="center">
+                <select className="button-update" onChange={e => setStatus(e.target.value)}>
+                  <option value="Select" disabled selected>Select Status</option>
+                  <option value="CANCEL">CANCEL</option>
+                  <option value="PENDING">PENDING</option>
+                  <option value="DELIVERED">DELIVERED</option>
+                  <option value="CONFIRMED">CONFIRMED</option>
+
+                </select>
+                <button className="button-update" style={{ marginTop: '5px' }} onClick={() => handleChangedStatus(row._id)}>Update Order</button>
+              </StyledTableCell>
+              <StyledTableCell align="center"> <button className="button-delete" onClick={() => handleDeleteOrder(row._id)}>Remove Order</button>
+              </StyledTableCell>
             </StyledTableRow>
           ))}
         </TableBody>
       </Table>
     </TableContainer>
-    );
+  );
 };
 
 export default OrderList;

@@ -1,0 +1,15 @@
+.contact-form{
+    width: 80%;
+    margin-top: 20px;
+}
+
+.input-field{
+    background-color: rgba(47, 79, 79, 0.548);
+}
+
+@media screen and (max-width:768px) {
+    .contact-form{
+        width: 100%;
+        margin-top: 20px;
+    }
+}

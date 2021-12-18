@@ -1,0 +1,8 @@
+.customer{
+    margin-left: 130px;
+}
+@media screen and (max-width:768px) {
+    .customer{
+        margin-left: 60px;
+    }
+}

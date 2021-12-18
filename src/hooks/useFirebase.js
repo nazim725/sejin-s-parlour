@@ -8,6 +8,7 @@ const useFirebase = () => {
     const [user, setUser] = useState({});
     const [isLoading, setIsLoading] = useState(true);
     const [authError, setAuthError] = useState('');
+    const [admin, setAdmin] = useState(false)
 
     const auth = getAuth();
     const googleProvider = new GoogleAuthProvider();
@@ -111,11 +112,18 @@ const useFirebase = () => {
                     alert("User Register Successfully")
             })
     }
+    // load admin for admin check kono email change hole check korbe admin kina.
+    useEffect(() => {
+        fetch(`http://localhost:5000/users/${user.email}`)
+            .then(res => res.json())
+            .then(data => setAdmin(data.admin))
+    }, [user.email])
 
 
 
     return {
         user,
+        admin,
         isLoading,
         authError,
         registerUser,

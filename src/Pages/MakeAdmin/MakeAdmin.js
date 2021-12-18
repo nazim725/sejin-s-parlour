@@ -21,13 +21,14 @@ const MakeAdmin = () => {
             .then(res => res.json())
             .then(data => {
                 console.log(data)
+                alert("Successfully make Admin")
                 e.target.reset();
             })
         e.preventDefault();
     }
     return (
         <div>
-            <h2>Make An Admin</h2>
+            <h2 style={{ marginTop: '20px', marginBottom: '20px', color: '#00ffff' }}>Make An Admin</h2>
             <form onSubmit={handleAdminSubmit}>
                 <TextField
                     style={{ width: '60%' }}
@@ -35,6 +36,11 @@ const MakeAdmin = () => {
                     label="Email"
                     type="email"
                     onBlur={handleOnBlur}
+                    sx={{ width: '100%', m: 1, input: { color: '#fff' } }}
+                    className='input-field'
+                    InputLabelProps={{
+                        style: { color: '#fff', paddingLeft: '10px' },
+                    }}
 
                 />
                 <br />

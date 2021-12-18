@@ -19,7 +19,7 @@ const AddReview = () => {
         const description = descriptionRef.current.value;
         const rating = ratingRef.current.value;
         const designation = designationRef.current.value;
-        const newReview = { name,img, description,companyName,rating,designation }
+        const newReview = { name, img, description, companyName, rating, designation }
 
 
         fetch('http://localhost:5000/reviews', {
@@ -39,51 +39,84 @@ const AddReview = () => {
         e.preventDefault();
     }
     return (
-        <form onSubmit={handleAddReview}>
-            <TextField
-                sx={{ width: '90%', m: 1 }}
-                id="outlined-size-small"
-                placeholder="Name"
-                size="small"
-                inputRef={nameRef}
-            />
-            <TextField
-                sx={{ width: '90%', m: 1 }}
-                id="outlined-size-small"
-                placeholder="description"
-                size="small"
-                inputRef={descriptionRef}
-            />
-            <TextField
-                sx={{ width: '90%', m: 1 }}
-                id="outlined-size-small"
-                placeholder="Company Name"
-                size="small"
-                inputRef={companyNameRef}
-            />
-            <TextField
-                sx={{ width: '90%', m: 1 }}
-                id="outlined-size-small"
-                placeholder="Designation"
-                size="small"
-                inputRef={designationRef}
-            />
-            <TextField
-                sx={{ width: '90%', m: 1 }}
-                id="outlined-size-small"
-                placeholder="Image URL"
-                size="small"
-                inputRef={imgRef}
-            />
-            <TextField
-                sx={{ width: '90%', m: 1 }}
-                id="outlined-size-small"
-                placeholder="RatingL"
-                size="small"
-                inputRef={ratingRef}
-            />
-            <Button type="submit" variant="contained">Add Review</Button>
-        </form>
+        <div>
+            <h2 style={{ marginTop: '30px', marginBottom: '30px', color: '#00FFFF' }}>Add Review</h2>
+            <form onSubmit={handleAddReview}>
+                <TextField
+
+                    id="outlined-size-small"
+                    placeholder="Name"
+                    size="small"
+                    inputRef={nameRef}
+                    className='input-field'
+                    sx={{ width: '100%', m: 1, input: { color: '#fff' } }}
+                    InputLabelProps={{
+                        style: { color: '#fff', paddingLeft: '10px' },
+                    }}
+                />
+                <TextField
+
+                    id="outlined-size-small"
+                    placeholder="description"
+                    size="small"
+                    inputRef={descriptionRef}
+                    className='input-field'
+                    sx={{ width: '100%', m: 1, input: { color: '#fff' } }}
+                    InputLabelProps={{
+                        style: { color: '#fff', paddingLeft: '10px' },
+                    }}
+                />
+                <TextField
+
+                    id="outlined-size-small"
+                    placeholder="Company Name"
+                    size="small"
+                    inputRef={companyNameRef}
+                    className='input-field'
+                    sx={{ width: '100%', m: 1, input: { color: '#fff' } }}
+                    InputLabelProps={{
+                        style: { color: '#fff', paddingLeft: '10px' },
+                    }}
+                />
+                <TextField
+
+                    id="outlined-size-small"
+                    placeholder="Designation"
+                    size="small"
+                    inputRef={designationRef}
+                    className='input-field'
+                    sx={{ width: '100%', m: 1, input: { color: '#fff' } }}
+                    InputLabelProps={{
+                        style: { color: '#fff', paddingLeft: '10px' },
+                    }}
+                />
+                <TextField
+
+                    id="outlined-size-small"
+                    placeholder="Image URL"
+                    size="small"
+                    inputRef={imgRef}
+                    className='input-field'
+                    sx={{ width: '100%', m: 1, input: { color: '#fff' } }}
+                    InputLabelProps={{
+                        style: { color: '#fff', paddingLeft: '10px' },
+                    }}
+                />
+                <TextField
+
+                    id="outlined-size-small"
+                    placeholder="RatingL"
+                    size="small"
+                    inputRef={ratingRef}
+                    className='input-field'
+                    sx={{ width: '100%', m: 1, input: { color: '#fff' } }}
+                    InputLabelProps={{
+                        style: { color: '#fff', paddingLeft: '10px' },
+                    }}
+                />
+                <Button type="submit" variant="contained">Add Review</Button>
+            </form>
+        </div>
     );
 };
 

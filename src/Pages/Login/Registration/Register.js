@@ -5,6 +5,7 @@ import TextField from '@mui/material/TextField';
 import { NavLink } from 'react-router-dom';
 import useAuth from '../../../hooks/useAuth';
 import { useNavigate } from 'react-router-dom';
+import bg from '../../../Images/bgImage2.png'
 
 const Register = () => {
 
@@ -34,78 +35,96 @@ const Register = () => {
     }
 
     return (
-        <Container>
-            <Grid container spacing={2}>
-                <Grid sx={{ mt: 8 }} item xs={12} md={12}>
-                    <Typography variant="body1" gutterBottom>
-                        Create Account
-                    </Typography>
+        <div style={{ background: `url(${bg})`, height: '800px' }}>
+            <Container>
+                <Grid container spacing={2}>
+                    <Grid sx={{ mt: 8 }} item xs={12} md={12}>
+                        <Typography style={{ color: '#00ffff', marginTop: '20px', marginBottom: '20px' }} variant="h3" gutterBottom>
+                            Create Account
+                        </Typography>
 
 
-                    {!isLoading && <form onSubmit={handleLoginSubmit}>
-                        <TextField
-                            id="standard-basic"
-                            label="Your Email"
-                            variant="standard"
-                            name="email"
-                            type="email"
-                            onBlur={handleOnBlur}
-                            sx={{ width: '75%', m: 1 }}
+                        {!isLoading && <form onSubmit={handleLoginSubmit}>
+                            <TextField
+                                id="standard-basic"
+                                label="Your Email"
+                                variant="standard"
+                                name="email"
+                                type="email"
+                                onBlur={handleOnBlur}
+                                className='input-field'
+                                sx={{ width: '75%', m: 1, input: { color: '#fff' } }}
+                                InputLabelProps={{
+                                    style: { color: '#fff', paddingLeft: '10px' },
+                                }}
 
-                        />
-                        <TextField
-                            id="standard-basic"
-                            label="Your Name"
-                            variant="standard"
-                            name="name"
-                            type="text"
-                            onBlur={handleOnBlur}
-                            sx={{ width: '75%', m: 1 }}
+                            />
+                            <TextField
+                                id="standard-basic"
+                                label="Your Name"
+                                variant="standard"
+                                name="name"
+                                type="text"
+                                onBlur={handleOnBlur}
+                                className='input-field'
+                                sx={{ width: '75%', m: 1, input: { color: '#fff' } }}
+                                InputLabelProps={{
+                                    style: { color: '#fff', paddingLeft: '10px' },
+                                }}
 
-                        />
+                            />
 
-                        <TextField
-                            id="standard-basic"
-                            label="Your Password"
-                            variant="standard"
-                            type="password"
-                            name="password"
-                            onBlur={handleOnBlur}
+                            <TextField
+                                id="standard-basic"
+                                label="Your Password"
+                                variant="standard"
+                                type="password"
+                                name="password"
+                                onBlur={handleOnBlur}
 
-                            sx={{ width: '75%', m: 1 }} />
-                        <TextField
-                            id="standard-basic"
-                            label=" Re-Enter Your Password"
-                            variant="standard"
-                            type="password"
-                            name="password2"
-                            onBlur={handleOnBlur}
+                                className='input-field'
+                                sx={{ width: '75%', m: 1, input: { color: '#fff' } }}
+                                InputLabelProps={{
+                                    style: { color: '#fff', paddingLeft: '10px' },
+                                }} />
+                            <TextField
+                                id="standard-basic"
+                                label=" Re-Enter Your Password"
+                                variant="standard"
+                                type="password"
+                                name="password2"
+                                onBlur={handleOnBlur}
 
-                            sx={{ width: '75%', m: 1 }} />
+                                className='input-field'
+                                sx={{ width: '75%', m: 1, input: { color: '#fff' } }}
+                                InputLabelProps={{
+                                    style: { color: '#fff', paddingLeft: '10px' },
+                                }} />
 
-                        <Button sx={{ width: '75%', m: 1 }} type="submit" variant="contained">Register</Button> 
+                            <Button sx={{ width: '75%', m: 1 }} type="submit" variant="contained">Register</Button>
 
-                        <NavLink style={{ textDecoration: 'none' }} to="/login"> <Button variant="text">Already Registered? Please Login</Button></NavLink>
+                            <NavLink style={{ textDecoration: 'none' }} to="/login"> <Button variant="text">Already Registered? Please Login</Button></NavLink>
 
-                    </form>}
+                        </form>}
 
-                    {
-                        isLoading && <CircularProgress />
-                    }
+                        {
+                            isLoading && <CircularProgress />
+                        }
 
-                    {
-                        user?.email && <Alert severity="success">Successfully Create Your Account</Alert>
-                    }
+                        {
+                            user?.email && <Alert severity="success">Successfully Create Your Account</Alert>
+                        }
 
-                    {
-                        authError && <Alert severity="error">{authError}</Alert>
-                    }
+                        {
+                            authError && <Alert severity="error">{authError}</Alert>
+                        }
+
+                    </Grid>
+
 
                 </Grid>
-
-
-            </Grid>
-        </Container>
+            </Container>
+        </div>
     );
 };
 

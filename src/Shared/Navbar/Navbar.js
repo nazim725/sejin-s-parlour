@@ -28,26 +28,26 @@ const Navbar = () => {
           <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
             Sejin's Parlour
           </Typography>
-          <NavLink style={{textDecoration:'none'}} to="/home"><Button  sx={{m:1,}}  variant="contained">Home</Button></NavLink>
+          <NavLink style={{ textDecoration: 'none' }} to="/home"><Button style={{ color: '#AF9B60' }} sx={{ m: 1, }}>Home</Button></NavLink>
 
-        {
-          user.email ?
-            <Button variant="contained" onClick={logout} sx={{m:1}}>logout</Button>
-            :
-            <NavLink style={{textDecoration:'none'}} to="/login"> <Button sx={{m:1}} variant="contained">Login</Button></NavLink>
-        }
-        {
-          user.email && <NavLink style={{textDecoration:'none'}} to="/dashboard"> <Button sx={{m:1}} variant="contained">Customer Care</Button></NavLink>
-        }
-        {
-          user.email && <NavLink style={{textDecoration:'none'}} to="/adminHome"> <Button sx={{m:1}} variant="contained">Admin</Button></NavLink>
-        }
+          {
+            user.email ?
+              <Button color="inherit" onClick={logout} sx={{ m: 1 }}>logout</Button>
+              :
+              <NavLink style={{ textDecoration: 'none' }} to="/login"> <Button sx={{ m: 1 }} color="inherit">Login</Button></NavLink>
+          }
+          {
+            user.email && <NavLink style={{ textDecoration: 'none' }} to="/dashboard"> <Button sx={{ m: 1 }} color="inherit">Customer Care</Button></NavLink>
+          }
+          {
+            user.email && <NavLink style={{ textDecoration: 'none' }} to="/adminHome"> <Button color="inherit" sx={{ m: 1 }} >Admin</Button></NavLink>
+          }
 
 
-      </Toolbar>
-    </AppBar>
+        </Toolbar>
+      </AppBar>
     </Box >
-    );
+  );
 };
 
 export default Navbar;

@@ -12,7 +12,7 @@ const Booking = () => {
     const [service, setService] = useState({})
     const { user } = useAuth();
     const { serviceId } = useParams()
-    const initialInfo = { customerName: user.displayName, email: user.email, phone: '' }
+    const initialInfo = { customerName: user.displayName, email: user.email, phone: '', status: 'PENDING' }
     const [bookingInfo, setBookingInfo] = useState(initialInfo);
     const handleOnBlur = e => {
         const field = e.target.name;
@@ -38,7 +38,7 @@ const Booking = () => {
         const bookService = {
             ...bookingInfo,
             serviceName: service.name,
-            servicePrice:service.price
+            servicePrice: service.price
 
         }
         // send to the server
@@ -62,39 +62,54 @@ const Booking = () => {
 
     return (
         <Box>
-            <Navbar></Navbar>
-            <Typography id="transition-modal-title" variant="h6" component="h2">
+
+            <Typography style={{ color: '#00ffff', marginBottom: '15px' }} id="transition-modal-title" variant="h6" component="h2">
                 {service.name}
             </Typography>
 
             <form onSubmit={handleBookingSubmit}>
                 <TextField
-                    sx={{ width: '90%', m: 1 }}
+
                     id="outlined-size-small"
                     name="patientName"
                     onBlur={handleOnBlur}
                     defaultValue={user.displayName}
                     size="small"
+                    sx={{ width: '100%', m: 1, input: { color: '#fff' } }}
+                    className='input-field'
+                    InputLabelProps={{
+                        style: { color: '#fff', paddingLeft: '10px' },
+                    }}
                 />
                 <TextField
-                    sx={{ width: '90%', m: 1 }}
+
                     id="outlined-size-small"
                     name="email"
                     onBlur={handleOnBlur}
                     defaultValue={user.email}
                     size="small"
+                    sx={{ width: '100%', m: 1, input: { color: '#fff' } }}
+                    className='input-field'
+                    InputLabelProps={{
+                        style: { color: '#fff', paddingLeft: '10px' },
+                    }}
                 />
                 <TextField
-                    sx={{ width: '90%', m: 1 }}
+
                     id="outlined-size-small"
                     name="phone"
                     onBlur={handleOnBlur}
                     defaultValue="Phone Number"
                     size="small"
+                    sx={{ width: '100%', m: 1, input: { color: '#fff' } }}
+                    className='input-field'
+                    InputLabelProps={{
+                        style: { color: '#fff', paddingLeft: '10px' },
+                    }}
                 />
 
-                <Typography id="transition-modal-title" variant="h6" component="h2">
-                Your Service Charged will be <span style={{color:'blue',fontWeight:'bold'}}>{service.price}  </span>tk
+                <Typography id="transition-modal-title" variant="h6" style={{ color: '#00ffff' }} component="h2">
+                    Your Service Charged will be <span style={{ color: 'blue', fontWeight: 'bold' }}>{service.price}  </span>tk
                 </Typography>
 
 

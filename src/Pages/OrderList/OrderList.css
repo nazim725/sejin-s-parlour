@@ -1,0 +1,14 @@
+.button-update{
+    background-color:rgba(47, 79, 79, 0.924);
+    width: 100px;
+    padding: 5px;
+    border-radius: 5px;
+    color: rgb(180, 209, 209);
+}
+.button-delete{
+    background-color: rgba(68, 97, 91, 0.89);
+    width: 100px;
+    padding: 5px;
+    border-radius: 5px;
+    color: rgb(180, 209, 209);
+}

@@ -36,37 +36,61 @@ const AddService = () => {
         e.preventDefault();
     }
     return (
-        <form onSubmit={handleAddService}>
-            <TextField
-                sx={{ width: '90%', m: 1 }}
-                id="outlined-size-small"
-                placeholder="Service Title"
-                size="small"
-                inputRef={nameRef}
-            />
-            <TextField
-                sx={{ width: '90%', m: 1 }}
-                id="outlined-size-small"
-                placeholder="description"
-                size="small"
-                inputRef={descriptionRef}
-            />
-            <TextField
-                sx={{ width: '90%', m: 1 }}
-                id="outlined-size-small"
-                placeholder="Price"
-                size="small"
-                inputRef={priceRef}
-            />
-            <TextField
-                sx={{ width: '90%', m: 1 }}
-                id="outlined-size-small"
-                placeholder="Image URL"
-                size="small"
-                inputRef={imgRef}
-            />
-            <Button type="submit" variant="contained">Add Service</Button>
-        </form>
+        <div>
+            <h2 style={{ marginTop: '20px', marginBottom: '20px', color: '#00ffff' }}>Add Service</h2>
+            <form onSubmit={handleAddService}>
+                <TextField
+
+                    id="outlined-size-small"
+                    placeholder="Service Title"
+                    size="small"
+                    inputRef={nameRef}
+                    sx={{ width: '100%', m: 1, input: { color: '#fff' } }}
+                    className='input-field'
+                    InputLabelProps={{
+                        style: { color: '#fff', paddingLeft: '10px' },
+                    }}
+                />
+                <TextField
+
+                    id="outlined-size-small"
+                    placeholder="description"
+                    size="small"
+                    inputRef={descriptionRef}
+                    sx={{ width: '100%', m: 1, input: { color: '#fff' } }}
+                    className='input-field'
+                    InputLabelProps={{
+                        style: { color: '#fff', paddingLeft: '10px' },
+                    }}
+                />
+                <TextField
+
+                    id="outlined-size-small"
+                    placeholder="Price"
+                    size="small"
+                    inputRef={priceRef}
+                    sx={{ width: '100%', m: 1, input: { color: '#fff' } }}
+                    className='input-field'
+                    InputLabelProps={{
+                        style: { color: '#fff', paddingLeft: '10px' },
+                    }}
+                />
+                <TextField
+
+                    id="outlined-size-small"
+                    placeholder="Image URL"
+                    size="small"
+                    inputRef={imgRef}
+                    sx={{ width: '100%', m: 1, input: { color: '#fff' } }}
+                    className='input-field'
+                    InputLabelProps={{
+                        style: { color: '#fff', paddingLeft: '10px' },
+                    }}
+                />
+                <Button type="submit" variant="contained">Add Service</Button>
+            </form>
+
+        </div>
     );
 };
 

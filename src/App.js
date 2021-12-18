@@ -16,6 +16,10 @@ import Booking from './Pages/ServiceList/Booking/Booking';
 import Dashboard from './Pages/Dashboard/Dashboard/Dashboard'
 import AdminHome from './Pages/Admin/AdminHome/AdminHome';
 import PrivateRoute from './Pages/PrivateRoute/PrivateRoute';
+import Contact from './Pages/Contact/Contact';
+import UpdateService from './Pages/Admin/UpdateService/UpdateService';
+import MyAppointment from './Pages/Dashboard/MyAppointment/MyAppointment';
+import 'bootstrap/dist/css/bootstrap.min.css';
 
 
 function App() {
@@ -26,16 +30,19 @@ function App() {
           <Routes>
             <Route path="/" element={<Home />} />
             <Route path="/home" element={<Home />} />
+            <Route path="/contact" element={<Contact />} />
             <Route path="/addService" element={<AddService />} />
             <Route path="/addReview" element={<AddReview />} />
             <Route path="/login" element={<Login />} />
             <Route path="/register" element={<Register />} />
             <Route path="/serviceList" element={<ServiceList />} />
-            <Route path="/booking/:serviceId" element={<Booking />} />
+            <Route path="/myAppointment" element={<MyAppointment />} />
+            <Route path="/updateService/:serviceId" element={<UpdateService />} />
             <Route path="/dashboard/*" element={<Dashboard />} />
             <Route path="/adminHome/*" element={<AdminHome />} />
 
-            
+
+
           </Routes>
         </Router>
       </AuthProvider>
