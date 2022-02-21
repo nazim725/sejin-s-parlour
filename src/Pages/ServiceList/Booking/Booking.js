@@ -1,122 +1,187 @@
-import React, { useEffect, useState } from 'react';
-import Box from '@mui/material/Box';
-import Typography from '@mui/material/Typography';
-import TextField from '@mui/material/TextField';
-import Button from '@mui/material/Button';
-import useAuth from '../../../hooks/useAuth';
-import { useParams } from 'react-router';
-import Navbar from '../../../Shared/Navbar/Navbar';
-
-
+import React, { useEffect, useState } from "react";
+import Box from "@mui/material/Box";
+import Typography from "@mui/material/Typography";
+import TextField from "@mui/material/TextField";
+import Button from "@mui/material/Button";
+import useAuth from "../../../hooks/useAuth";
+import { useNavigate, useParams } from "react-router";
+import Navbar from "../../../Shared/Navbar/Navbar";
+import AdapterDateFns from "@mui/lab/AdapterDateFns";
+import LocalizationProvider from "@mui/lab/LocalizationProvider";
+import DatePicker from "@mui/lab/DatePicker";
+import Stack from "@mui/material/Stack";
+import TimePicker from "@mui/lab/TimePicker";
 const Booking = () => {
-    const [service, setService] = useState({})
-    const { user } = useAuth();
-    const { serviceId } = useParams()
-    const initialInfo = { customerName: user.displayName, email: user.email, phone: '', status: 'PENDING' }
-    const [bookingInfo, setBookingInfo] = useState(initialInfo);
-    const handleOnBlur = e => {
-        const field = e.target.name;
-        const value = e.target.value;
-        const newInfo = { ...bookingInfo };
-        newInfo[field] = value;
-        setBookingInfo(newInfo);
-    }
+  const [service, setService] = useState({});
+  const [date, setDate] = React.useState(new Date());
+  const [time, setTime] = React.useState(new Date());
+  const newDate = date.toLocaleDateString();
+  const newTime = date.toLocaleTimeString();
+  const { user } = useAuth();
+  const { serviceId } = useParams();
+  const navigate = useNavigate();
+  const initialInfo = {
+    customerName: user.displayName,
+    email: user.email,
+    phone: "",
+    status: "PENDING",
+    date: newDate,
+    time: newTime,
+  };
+  const [bookingInfo, setBookingInfo] = useState(initialInfo);
+  const handleOnBlur = (e) => {
+    const field = e.target.name;
+    const value = e.target.value;
+    const newInfo = { ...bookingInfo };
+    newInfo[field] = value;
+    setBookingInfo(newInfo);
+  };
 
-    useEffect(() => {
-        const url = `https://serene-badlands-96491.herokuapp.com/services/${serviceId}`
-        fetch(url)
-            .then(res => res.json())
-            .then(data => {
-                setService(data)
-                console.log(data)
-            })
-    }, [])
+  useEffect(() => {
+    const url = `https://serene-badlands-96491.herokuapp.com/services/${serviceId}`;
+    fetch(url)
+      .then((res) => res.json())
+      .then((data) => {
+        setService(data);
+        console.log(data);
+      });
+  }, []);
 
-
-    const handleBookingSubmit = e => {
-        // collect data
-        const bookService = {
-            ...bookingInfo,
-            serviceName: service.name,
-            servicePrice: service.price
-
+  const handleBookingSubmit = (e) => {
+    // collect data
+    const bookService = {
+      ...bookingInfo,
+      serviceName: service.name,
+      servicePrice: service.price,
+    };
+    // send to the server
+    fetch("https://serene-badlands-96491.herokuapp.com/orders", {
+      method: "POST",
+      headers: {
+        "content-type": "application/json",
+      },
+      body: JSON.stringify(bookService),
+    })
+      .then((res) => res.json())
+      .then((data) => {
+        if (data.insertedId) {
+          alert("Successfully Booked Your service");
         }
-        // send to the server
-        fetch('https://serene-badlands-96491.herokuapp.com/orders', {
-            method: 'POST',
-            headers: {
-                'content-type': 'application/json'
-            },
-            body: JSON.stringify(bookService)
-        })
-            .then(res => res.json())
-            .then(data => {
-                if (data.insertedId) {
-                    alert("Successfully Booked Your service")
+      });
 
-                }
-            });
+    navigate("/dashboard/myAppointment");
 
-        e.preventDefault();
-    }
+    e.preventDefault();
+  };
 
-    return (
-        <Box>
+  return (
+    <Box>
+      <Typography
+        style={{ color: "#00ffff", marginBottom: "15px" }}
+        id="transition-modal-title"
+        variant="h6"
+        component="h2"
+      >
+        {service.name}
+      </Typography>
 
-            <Typography style={{ color: '#00ffff', marginBottom: '15px' }} id="transition-modal-title" variant="h6" component="h2">
-                {service.name}
-            </Typography>
+      <form onSubmit={handleBookingSubmit}>
+        <TextField
+          id="outlined-size-small"
+          name="patientName"
+          onBlur={handleOnBlur}
+          defaultValue={user.displayName}
+          size="small"
+          sx={{ width: "100%", m: 1, input: { color: "#fff" } }}
+          className="input-field"
+          InputLabelProps={{
+            style: { color: "#fff", paddingLeft: "10px" },
+          }}
+        />
+        <TextField
+          id="outlined-size-small"
+          name="email"
+          onBlur={handleOnBlur}
+          defaultValue={user.email}
+          size="small"
+          sx={{ width: "100%", m: 1, input: { color: "#fff" } }}
+          className="input-field"
+          InputLabelProps={{
+            style: { color: "#fff", paddingLeft: "10px" },
+          }}
+        />
+        <TextField
+          id="outlined-size-small"
+          name="phone"
+          onBlur={handleOnBlur}
+          defaultValue="Phone Number"
+          size="small"
+          sx={{ width: "100%", m: 1, input: { color: "#fff" } }}
+          className="input-field"
+          InputLabelProps={{
+            style: { color: "#fff", paddingLeft: "10px" },
+          }}
+        />
 
-            <form onSubmit={handleBookingSubmit}>
+        <LocalizationProvider dateAdapter={AdapterDateFns}>
+          <Stack spacing={3}>
+            <DatePicker
+              disableFuture
+              // openTo="day"
+              views={["day"]}
+              value={date}
+              onChange={(newValue) => {
+                setDate(newValue);
+              }}
+              renderInput={(params) => (
                 <TextField
-
-                    id="outlined-size-small"
-                    name="patientName"
-                    onBlur={handleOnBlur}
-                    defaultValue={user.displayName}
-                    size="small"
-                    sx={{ width: '100%', m: 1, input: { color: '#fff' } }}
-                    className='input-field'
-                    InputLabelProps={{
-                        style: { color: '#fff', paddingLeft: '10px' },
-                    }}
+                  className="input-field"
+                  InputLabelProps={{
+                    style: { color: "#fff", paddingLeft: "10px" },
+                  }}
+                  sx={{ width: "100%", m: 1, input: { color: "#fff" } }}
+                  {...params}
                 />
-                <TextField
+              )}
+            />
+          </Stack>
+        </LocalizationProvider>
+        <LocalizationProvider dateAdapter={AdapterDateFns}>
+          <TimePicker
+            value={time}
+            onChange={setTime}
+            renderInput={(params) => (
+              <TextField
+                className="input-field"
+                InputLabelProps={{
+                  style: { color: "#fff", paddingLeft: "10px" },
+                }}
+                sx={{ width: "100%", m: 1, input: { color: "#fff" } }}
+                {...params}
+              />
+            )}
+          />
+        </LocalizationProvider>
 
-                    id="outlined-size-small"
-                    name="email"
-                    onBlur={handleOnBlur}
-                    defaultValue={user.email}
-                    size="small"
-                    sx={{ width: '100%', m: 1, input: { color: '#fff' } }}
-                    className='input-field'
-                    InputLabelProps={{
-                        style: { color: '#fff', paddingLeft: '10px' },
-                    }}
-                />
-                <TextField
+        <Typography
+          id="transition-modal-title"
+          variant="h6"
+          style={{ color: "#00ffff" }}
+          component="h2"
+        >
+          Your Service Charged will be{" "}
+          <span style={{ color: "blue", fontWeight: "bold" }}>
+            {service.price}{" "}
+          </span>
+          tk
+        </Typography>
 
-                    id="outlined-size-small"
-                    name="phone"
-                    onBlur={handleOnBlur}
-                    defaultValue="Phone Number"
-                    size="small"
-                    sx={{ width: '100%', m: 1, input: { color: '#fff' } }}
-                    className='input-field'
-                    InputLabelProps={{
-                        style: { color: '#fff', paddingLeft: '10px' },
-                    }}
-                />
-
-                <Typography id="transition-modal-title" variant="h6" style={{ color: '#00ffff' }} component="h2">
-                    Your Service Charged will be <span style={{ color: 'blue', fontWeight: 'bold' }}>{service.price}  </span>tk
-                </Typography>
-
-
-                <Button type="submit" variant="contained">Submit</Button>
-            </form>
-        </Box>
-    );
+        <Button type="submit" variant="contained">
+          Submit
+        </Button>
+      </form>
+    </Box>
+  );
 };
 
 export default Booking;
