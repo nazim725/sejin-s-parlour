@@ -13,7 +13,7 @@ const CheckoutForm = ({ order }) => {
   const [processing, setProcessing] = useState(false);
   const { user } = useAuth();
   useEffect(() => {
-    fetch("http://localhost:5000/create-payment-intent", {
+    fetch("https://serene-badlands-96491.herokuapp.com/create-payment-intent", {
       method: "POST",
       headers: {
         "content-type": "application/json",

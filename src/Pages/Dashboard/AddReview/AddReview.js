@@ -13,7 +13,7 @@ const AddReview = () => {
   const [services, setServices] = React.useState([]);
   const [service, setService] = React.useState();
   React.useEffect(() => {
-    fetch("http://localhost:5000/services")
+    fetch("https://serene-badlands-96491.herokuapp.com/services")
       .then((res) => res.json())
       .then((data) => {
         setServices(data);
