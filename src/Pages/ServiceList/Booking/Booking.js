@@ -11,6 +11,8 @@ import LocalizationProvider from "@mui/lab/LocalizationProvider";
 import DatePicker from "@mui/lab/DatePicker";
 import Stack from "@mui/material/Stack";
 import TimePicker from "@mui/lab/TimePicker";
+import bg from "../../../Images/bgImage2.png";
+import AppBar from "../../../Shared/AppBar/AppBar";
 const Booking = () => {
   const [service, setService] = useState({});
   const [date, setDate] = React.useState(new Date());
@@ -75,112 +77,119 @@ const Booking = () => {
   };
 
   return (
-    <Box>
-      <Typography
-        style={{ color: "#00ffff", marginBottom: "15px" }}
-        id="transition-modal-title"
-        variant="h6"
-        component="h2"
-      >
-        {service.name}
-      </Typography>
+    <div
+      style={{ background: `url(${bg})`, height: "800px", paddingTop: "10px" }}
+    >
+      <AppBar></AppBar>
 
-      <form onSubmit={handleBookingSubmit}>
-        <TextField
-          id="outlined-size-small"
-          name="patientName"
-          onBlur={handleOnBlur}
-          defaultValue={user.displayName}
-          size="small"
-          sx={{ width: "100%", m: 1, input: { color: "#fff" } }}
-          className="input-field"
-          InputLabelProps={{
-            style: { color: "#fff", paddingLeft: "10px" },
-          }}
-        />
-        <TextField
-          id="outlined-size-small"
-          name="email"
-          onBlur={handleOnBlur}
-          defaultValue={user.email}
-          size="small"
-          sx={{ width: "100%", m: 1, input: { color: "#fff" } }}
-          className="input-field"
-          InputLabelProps={{
-            style: { color: "#fff", paddingLeft: "10px" },
-          }}
-        />
-        <TextField
-          id="outlined-size-small"
-          name="phone"
-          onBlur={handleOnBlur}
-          defaultValue="Phone Number"
-          size="small"
-          sx={{ width: "100%", m: 1, input: { color: "#fff" } }}
-          className="input-field"
-          InputLabelProps={{
-            style: { color: "#fff", paddingLeft: "10px" },
-          }}
-        />
+      <Box>
+        <Typography
+          style={{ color: "#00ffff", marginBottom: "15px" }}
+          id="transition-modal-title"
+          variant="h6"
+          component="h2"
+        >
+          {service.name}
+        </Typography>
 
-        <LocalizationProvider dateAdapter={AdapterDateFns}>
-          <Stack spacing={3}>
-            <DatePicker
-              disableFuture
-              // openTo="day"
-              views={["day"]}
-              value={date}
-              onChange={(newValue) => {
-                setDate(newValue);
-              }}
+        <form onSubmit={handleBookingSubmit}>
+          <TextField
+            id="outlined-size-small"
+            name="patientName"
+            onBlur={handleOnBlur}
+            defaultValue={user.displayName}
+            size="small"
+            sx={{ width: "70%", m: 1, input: { color: "#fff" } }}
+            className="input-field"
+            InputLabelProps={{
+              style: { color: "#fff", paddingLeft: "10px" },
+            }}
+          />
+          <TextField
+            id="outlined-size-small"
+            name="email"
+            onBlur={handleOnBlur}
+            defaultValue={user.email}
+            size="small"
+            sx={{ width: "70%", m: 1, input: { color: "#fff" } }}
+            className="input-field"
+            InputLabelProps={{
+              style: { color: "#fff", paddingLeft: "10px" },
+            }}
+          />
+          <TextField
+            id="outlined-size-small"
+            name="phone"
+            onBlur={handleOnBlur}
+            defaultValue="Phone Number"
+            size="small"
+            sx={{ width: "70%", m: 1, input: { color: "#fff" } }}
+            className="input-field"
+            InputLabelProps={{
+              style: { color: "#fff", paddingLeft: "10px" },
+            }}
+          />
+
+          <LocalizationProvider dateAdapter={AdapterDateFns}>
+            <Stack spacing={3}>
+              <DatePicker
+                disableFuture
+                // openTo="day"
+                views={["day"]}
+                value={date}
+                onChange={(newValue) => {
+                  setDate(newValue);
+                }}
+                renderInput={(params) => (
+                  <TextField
+                    className="input-field"
+                    InputLabelProps={{
+                      style: { color: "#fff", paddingLeft: "10px" },
+                    }}
+                    sx={{ width: "70%", m: 1, input: { color: "#fff" } }}
+                    {...params}
+                    style={{ margin: "auto" }}
+                  />
+                )}
+              />
+            </Stack>
+          </LocalizationProvider>
+          <LocalizationProvider dateAdapter={AdapterDateFns}>
+            <TimePicker
+              value={time}
+              onChange={setTime}
               renderInput={(params) => (
                 <TextField
                   className="input-field"
                   InputLabelProps={{
                     style: { color: "#fff", paddingLeft: "10px" },
                   }}
-                  sx={{ width: "100%", m: 1, input: { color: "#fff" } }}
+                  sx={{ width: "70%", m: 1, input: { color: "#fff" } }}
                   {...params}
                 />
               )}
             />
-          </Stack>
-        </LocalizationProvider>
-        <LocalizationProvider dateAdapter={AdapterDateFns}>
-          <TimePicker
-            value={time}
-            onChange={setTime}
-            renderInput={(params) => (
-              <TextField
-                className="input-field"
-                InputLabelProps={{
-                  style: { color: "#fff", paddingLeft: "10px" },
-                }}
-                sx={{ width: "100%", m: 1, input: { color: "#fff" } }}
-                {...params}
-              />
-            )}
-          />
-        </LocalizationProvider>
+          </LocalizationProvider>
 
-        <Typography
-          id="transition-modal-title"
-          variant="h6"
-          style={{ color: "#00ffff" }}
-          component="h2"
-        >
-          Your Service Charged will be{" "}
-          <span style={{ color: "blue", fontWeight: "bold" }}>
-            {service.price}{" "}
-          </span>
-          tk
-        </Typography>
+          <Typography
+            id="transition-modal-title"
+            variant="h6"
+            style={{ color: "#00ffff" }}
+            component="h2"
+          >
+            Your Service Charged will be{" "}
+            <span style={{ color: "#ffff", fontWeight: "bold" }}>
+              {service.price}{" "}
+            </span>
+            tk
+          </Typography>
 
-        <Button type="submit" variant="contained">
-          Submit
-        </Button>
-      </form>
-    </Box>
+          <Button type="submit" variant="contained">
+            Submit
+          </Button>
+        </form>
+      </Box>
+    </div>
   );
 };
 
