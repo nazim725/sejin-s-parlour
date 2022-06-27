@@ -5,7 +5,7 @@ import './Screen.css'
 
 const Screen = () => {
     return (
-        <div style={{ marginTop: '50px' }}>
+        <div style={{ marginTop: '100px' }}>
             <Grid container spacing={2}>
                 <Grid item xs={12} md={6} lg={6}>
                     <img src={img} alt="" width="75%" height="100%" />

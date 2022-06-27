@@ -13,7 +13,7 @@ const Services = () => {
             })
     }, [])
     return (
-        <div>
+        <div style={{marginTop:'100px'}} className="container">
             <h2 style={{ color: '#00FFFF', marginTop: '30px', marginBottom: '30px' }}>Our Awesome Services</h2>
             <div className="service-container">
                 {
