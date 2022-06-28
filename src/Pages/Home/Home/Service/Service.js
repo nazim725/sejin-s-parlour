@@ -30,7 +30,7 @@ const Service = (props) => {
                 {price}
               </Typography>
               <Typography variant="body2" color="text.secondary">
-                {description}
+                {description.slice(0,70)}
               </Typography>
             </CardContent>
           </CardActionArea>

@@ -1,14 +1,14 @@
-import * as React from "react";
-import Card from "@mui/material/Card";
-import CardContent from "@mui/material/CardContent";
-import CardMedia from "@mui/material/CardMedia";
-import Typography from "@mui/material/Typography";
-import { CardActionArea, Button } from "@mui/material";
-import Booking from "../../ServiceList/Booking/Booking";
-import { Link } from "react-router-dom";
+import * as React from 'react'
+import Card from '@mui/material/Card'
+import CardContent from '@mui/material/CardContent'
+import CardMedia from '@mui/material/CardMedia'
+import Typography from '@mui/material/Typography'
+import { CardActionArea, Button } from '@mui/material'
+import Booking from '../../ServiceList/Booking/Booking'
+import { Link } from 'react-router-dom'
 
 const ServiceItem = (props) => {
-  const { name, price, description, img, _id } = props.service;
+  const { name, price, description, img, _id } = props.service
   return (
     <>
       <Card
@@ -18,7 +18,7 @@ const ServiceItem = (props) => {
         <CardActionArea>
           <CardMedia
             component="img"
-            height="140"
+            height="200"
             image={img}
             alt="green iguana"
           />
@@ -30,16 +30,16 @@ const ServiceItem = (props) => {
               {price}
             </Typography>
             <Typography variant="body2" color="text.secondary">
-              {description}
+              {description.slice(0, 80)}
             </Typography>
           </CardContent>
-          <Link style={{ textDecoration: "none" }} to={`/booking/${_id}`}>
+          <Link style={{ textDecoration: 'none' }} to={`/booking/${_id}`}>
             <Button variant="contained">Book</Button>
           </Link>
         </CardActionArea>
       </Card>
     </>
-  );
-};
+  )
+}
 
-export default ServiceItem;
+export default ServiceItem
