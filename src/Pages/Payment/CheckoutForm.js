@@ -13,7 +13,7 @@ const CheckoutForm = ({ order }) => {
   const [processing, setProcessing] = useState(false);
   const { user } = useAuth();
   useEffect(() => {
-    fetch("https://serene-badlands-96491.herokuapp.com/create-payment-intent", {
+    fetch("https://sejin-parlour.herokuapp.com/create-payment-intent", {
       method: "POST",
       headers: {
         "content-type": "application/json",
@@ -84,7 +84,7 @@ const CheckoutForm = ({ order }) => {
         last4: paymentMethod.card.last4,
         transaction: paymentIntent.client_secret.slice("_secret")[0],
       };
-      const url = `https://serene-badlands-96491.herokuapp.com/orders/${_id}`;
+      const url = `https://sejin-parlour.herokuapp.com/orders/${_id}`;
       fetch(url, {
         method: "PUT",
         headers: {

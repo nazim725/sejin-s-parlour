@@ -42,7 +42,7 @@ const ManageUsers = () => {
 
   const [users, setUsers] = React.useState([]);
   React.useEffect(() => {
-    fetch("https://serene-badlands-96491.herokuapp.com/users")
+    fetch("https://sejin-parlour.herokuapp.com/users")
       .then((res) => res.json())
       .then((data) => {
         setUsers(data);
@@ -55,7 +55,7 @@ const ManageUsers = () => {
       "Are you sure, you want to remove this user?"
     );
     if (proceed) {
-      const url = `https://serene-badlands-96491.herokuapp.com/users/${id}`;
+      const url = `https://sejin-parlour.herokuapp.com/users/${id}`;
       fetch(url, {
         method: "DELETE",
       })

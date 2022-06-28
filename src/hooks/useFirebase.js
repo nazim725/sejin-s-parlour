@@ -106,7 +106,7 @@ const useFirebase = () => {
   //  save user in database
   const saveUser = (email, displayName, method) => {
     const user = { email, displayName };
-    fetch("https://serene-badlands-96491.herokuapp.com/users", {
+    fetch("https://sejin-parlour.herokuapp.com/users", {
       method: method,
       headers: {
         "content-type": "application/json",
@@ -120,7 +120,7 @@ const useFirebase = () => {
   };
   // load admin for admin check kono email change hole check korbe admin kina.
   useEffect(() => {
-    fetch(`https://serene-badlands-96491.herokuapp.com/users/${user.email}`)
+    fetch(`https://sejin-parlour.herokuapp.com/users/${user.email}`)
       .then((res) => res.json())
       .then((data) => setAdmin(data.admin));
   }, [user.email]);

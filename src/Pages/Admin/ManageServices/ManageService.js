@@ -47,7 +47,7 @@ const ManageService = () => {
 
     const [services, setServices] = React.useState([])
     React.useEffect(() => {
-        fetch('https://serene-badlands-96491.herokuapp.com/services')
+        fetch('https://sejin-parlour.herokuapp.com/services')
             .then(res => res.json())
             .then(data => {
                 setServices(data)
@@ -60,7 +60,7 @@ const ManageService = () => {
     const handleDelete = id => {
         const proceed = window.confirm('Are you sure, you want to delete?');
         if (proceed) {
-            const url = `https://serene-badlands-96491.herokuapp.com/services/${id}`;
+            const url = `https://sejin-parlour.herokuapp.com/services/${id}`;
             fetch(url, {
                 method: 'DELETE'
             })

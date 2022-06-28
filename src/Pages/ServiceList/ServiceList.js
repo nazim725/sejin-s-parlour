@@ -6,7 +6,7 @@ import AppBar from "../../Shared/AppBar/AppBar";
 const ServiceList = () => {
   const [services, setServices] = useState([]);
   useEffect(() => {
-    fetch("https://serene-badlands-96491.herokuapp.com/services")
+    fetch("https://sejin-parlour.herokuapp.com/services")
       .then((res) => res.json())
       .then((data) => {
         setServices(data);

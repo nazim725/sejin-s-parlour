@@ -13,7 +13,7 @@ const AddReview = () => {
   const [services, setServices] = React.useState([]);
   const [service, setService] = React.useState();
   React.useEffect(() => {
-    fetch("https://serene-badlands-96491.herokuapp.com/services")
+    fetch("https://sejin-parlour.herokuapp.com/services")
       .then((res) => res.json())
       .then((data) => {
         setServices(data);
@@ -44,7 +44,7 @@ const AddReview = () => {
       serviceName,
     };
 
-    fetch("https://serene-badlands-96491.herokuapp.com/reviews", {
+    fetch("https://sejin-parlour.herokuapp.com/reviews", {
       method: "POST",
       headers: {
         "content-type": "application/json",

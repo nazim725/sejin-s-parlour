@@ -12,7 +12,7 @@ const UpdateService = () => {
     const [service, setService] = useState({});
     const navigate = useNavigate();
 
-    const url = `https://serene-badlands-96491.herokuapp.com/services/${serviceId}`
+    const url = `https://sejin-parlour.herokuapp.com/services/${serviceId}`
     useEffect(() => {
         fetch(url)
             .then(res => res.json())
@@ -23,7 +23,7 @@ const UpdateService = () => {
 
 
     const handleUpdateService = e => {
-        const url = `https://serene-badlands-96491.herokuapp.com/services/${serviceId}`;
+        const url = `https://sejin-parlour.herokuapp.com/services/${serviceId}`;
         console.log(url)
         fetch(url, {
             method: 'PUT',

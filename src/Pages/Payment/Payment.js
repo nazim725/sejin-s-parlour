@@ -10,7 +10,7 @@ const Payment = () => {
     const { bookingId } = useParams();
     const [order, setOrder] = useState({});
     useEffect(() => {
-        fetch(`https://serene-badlands-96491.herokuapp.com/orders/${bookingId}`)
+        fetch(`https://sejin-parlour.herokuapp.com/orders/${bookingId}`)
             .then(res => res.json())
             .then(data => {
                 setOrder(data)

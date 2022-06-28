@@ -40,7 +40,7 @@ const Booking = () => {
   };
 
   useEffect(() => {
-    const url = `https://serene-badlands-96491.herokuapp.com/services/${serviceId}`;
+    const url = `https://sejin-parlour.herokuapp.com/services/${serviceId}`;
     fetch(url)
       .then((res) => res.json())
       .then((data) => {
@@ -57,7 +57,7 @@ const Booking = () => {
       servicePrice: service.price,
     };
     // send to the server
-    fetch("https://serene-badlands-96491.herokuapp.com/orders", {
+    fetch("https://sejin-parlour.herokuapp.com/orders", {
       method: "POST",
       headers: {
         "content-type": "application/json",
